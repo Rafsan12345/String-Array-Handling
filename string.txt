@@ -1,0 +1,132 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[] = "Hello, welcome to C programming.";
+    char *sub;
+
+    sub = strstr(str, "welcome");
+
+    if (sub != NULL) {
+        printf("Substring found: %s\n", sub);
+    } else {
+        printf("Substring not found.\n");
+    }
+
+    return 0;
+}
+.............................................................
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[20];
+
+    // Set the first 10 bytes of str to 'A'
+    memset(str, 'A', 10);
+    
+    // Set the remaining bytes to '0'
+    memset(str + 10, '0', 10);
+
+    printf("String after memset: %s\n", str);
+
+    return 0;
+}
+\
+
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char arr[10];
+    memset(arr, 0, sizeof(arr)); // সব বাইট 0 করা
+    return 0;
+}
+
+.........................................
+
+
+
+#include <stdio.h>
+
+int main() {
+    char str[] = "LED:45 45 EXTRACTION";
+    int ledValue, extraValue;
+
+    // Parse the string using sscanf to extract integers
+    sscanf(str, "LED:%d %d", &ledValue, &extraValue);
+
+    printf("LED Value: %d\n", ledValue);
+    printf("Extra Value: %d\n", extraValue);
+
+    return 0;
+}
+..........................................................
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "cJSON.h"  // Include the cJSON library
+
+int main() {
+    // JSON string
+    const char *json_string = "{\"LED\": 45, \"extra\": 45, \"message\": \"EXTRACTION\"}";
+
+    // Parse the JSON string
+    cJSON *json = cJSON_Parse(json_string);
+
+    if (json == NULL) {
+        printf("Error parsing JSON\n");
+        return 1;
+    }
+
+    // Extract values from JSON
+    cJSON *led_value = cJSON_GetObjectItemCaseSensitive(json, "LED");
+    cJSON *extra_value = cJSON_GetObjectItemCaseSensitive(json, "extra");
+    cJSON *message = cJSON_GetObjectItemCaseSensitive(json, "message");
+
+    // Print the values
+    if (cJSON_IsNumber(led_value)) {
+        printf("LED Value: %d\n", led_value->valueint);
+    }
+    
+    if (cJSON_IsNumber(extra_value)) {
+        printf("Extra Value: %d\n", extra_value->valueint);
+    }
+
+    if (cJSON_IsString(message) && (message->valuestring != NULL)) {
+        printf("Message: %s\n", message->valuestring);
+    }
+
+    // Clean up
+    cJSON_Delete(json);
+
+    return 0;
+}
+
+..................................................
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[] = "Hello, welcome to C programming.01784032597";
+    char *sub;
+
+    sub = strstr(str, "017");
+
+    if (sub != NULL) {
+        printf("Substring found: %s\n", sub);
+    } else {
+        printf("Substring not found.\n");
+    }
+
+    return 0;
+}
+................................................
+
+
+
+
+
